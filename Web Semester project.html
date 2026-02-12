@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutlary · booking</title>
+    <!-- Font & Icons (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font for clean modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f7f5;  /* soft warm background */
+            color: #2e2a28;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-container {
+            max-width: 1280px;
+            width: 100%;
+        }
+
+        /* header / brand */
+        .brand-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #6b4f3c;
+        }
+
+        .logo h1 {
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.5px;
+            color: #3f2e26;
+        }
+
+        .logo span {
+            background: #e6dcd5;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5a3f33;
+            margin-left: 8px;
+        }
+
+        .booking-summary {
+            background: #fff5ef;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #5c4a3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .booking-summary i {
+            color: #967259;
+        }
+
+        /* hero / description */
+        .hero {
+            background: #fffcf9;
+            border-radius: 32px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(98, 70, 54, 0.04);
+            border: 1px solid #f1e4dd;
+        }
+
+        .hero-text h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #3c2e27;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #6e5b50;
+            max-width: 600px;
+        }
+
+        .hero-icon {
+            background: #dabfae;
+            padding: 1rem 1.3rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* booking form card */
+        .booking-card {
+            background: white;
+            border-radius: 36px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 20px 35px -5px rgba(78, 55, 46, 0.06);
+            border: 1px solid #efe7e2;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: #7c6a60;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-group label i {
+            font-size: 0.9rem;
+            color: #a08474;
+        }
+
+        .input-field {
+            background: #fbf9f8;
+            border: 1.5px solid #e8dfda;
+            border-radius: 20px;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2e2a28;
+            transition: 0.2s;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-field:hover, .input-field:focus {
+            border-color: #b3927e;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(179, 146, 126, 0.12);
+        }
+
+        .date-time-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: #7a5c4b;
+            border: none;
+            border-radius: 40px;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #7a5c4b;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .btn-primary i {
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background: #634b3d;
+            border-color: #634b3d;
+            transform: scale(0.98);
+            box-shadow: 0 10px 20px rgba(110, 70, 54, 0.15);
+        }
+
+        /* cutlery showcase & selection */
+        .section-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #433730;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title span {
+            background: #f2eae6;
+            color: #634b3d;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cutlery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .cutlery-item {
+            background: white;
+            border-radius: 26px;
+            padding: 1.6rem 1rem 1.4rem;
+            text-align: center;
+            transition: all 0.15s ease;
+            border: 1.5px solid #f0e7e2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cutlery-item.selected {
+            border: 2.5px solid #967259;
+            background: #fdf9f7;
+            box-shadow: 0 12px 22px rgba(150, 114, 89, 0.08);
+        }
+
+        .cutlery-item i {
+            font-size: 2.8rem;
+            color: #6b5344;
+            margin-bottom: 10px;
+        }
+
+        .cutlery-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #3f312b;
+            margin-bottom: 6px;
+        }
+
+        .cutlery-desc {
+            font-size: 0.8rem;
+            color: #8c7a70;
+            margin-bottom: 16px;
+        }
+
+        .availability {
+            display: inline-block;
+            background: #eae1db;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #4e3d35;
+        }
+
+        .selected-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #7a5c4b;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* booking list / summary side */
+        .booking-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .reservation-side {
+            background: #fffaf7;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #eddcd2;
+            margin-top: 1.2rem;
+        }
+
+        .reservation-side h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4e3b32;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-list {
+            list-style: none;
+            margin-bottom: 1.8rem;
+        }
+
+        .booking-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 0;
+            border-bottom: 1px dashed #e2d3cb;
+        }
+
+        .booking-list li:last-child {
+            border-bottom: none;
+        }
+
+        .booking-item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-item-title {
+            font-weight: 700;
+            color: #4f3c33;
+        }
+
+        .booking-item-meta {
+            font-size: 0.8rem;
+            color: #8d7a70;
+        }
+
+        .booking-item-price {
+            font-weight: 700;
+            color: #6b4f3c;
+        }
+
+        .total-amount {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2e2a28;
+            border-top: 2px solid #e6d7d0;
+        }
+
+        .btn-confirm {
+            background: #c1a18e;
+            border: none;
+            border-radius: 40px;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #c1a18e;
+        }
+
+        .btn-confirm:hover {
+            background: #a88470;
+            border-color: #a88470;
+        }
+
+        .empty-state {
+            color: #a79086;
+            text-align: center;
+            padding: 1.2rem 0;
+            font-style: italic;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #a3887c;
+            font-size: 0.85rem;
+            border-top: 1px solid #e6dbd5;
+            padding-top: 2rem;
+        }
+
+        .fa-solid, .fa-regular {
+            pointer-events: none;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 1.2rem; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-icon { margin-top: 1rem; }
+            .brand-bar { flex-direction: column; align-items: start; gap: 0.8rem;}
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header / brand -->
+        <div class="brand-bar">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <h1>cutlary<span>booking</span></h1>
+            </div>
+            <div class="booking-summary">
+                <i class="fas fa-calendar-check"></i>
+                <span id="liveBookingHint">No active booking</span>
+            </div>
+        </div>
+
+        <!-- Hero section -->
+        <div class="hero">
+            <div class="hero-text">
+                <h2>Reserve heirloom cutlery</h2>
+                <p>For weddings, parties & special moments — borrow elegance, return with memories.</p>
+            </div>
+            <div class="hero-icon">
+                <i class="fas fa-knife-kitchen"></i>
+            </div>
+        </div>
+
+        <!-- MAIN BOOKING CARD (date, guests, time, search) -->
+        <div class="booking-card">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-alt"></i> Event date</label>
+                    <input type="date" id="eventDate" class="input-field" value="2025-06-15">
+                </div>
+                <div class="date-time-group">
+                    <div class="input-group">
+                        <label><i class="fas fa-clock"></i> From</label>
+                        <select id="startTime" class="input-field">
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>01:00 PM</option>
+                            <option>02:00 PM</option>
+                            <option>03:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>06:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-clock"></i> To</label>
+                        <select id="endTime" class="input-field">
+                            <option>12:00 PM</option>
+                            <option>01:00 PM</option>
+                            <option>02:00 PM</option>
+                            <option>03:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>06:00 PM</option>
+                            <option>07:00 PM</option>
+                            <option>08:00 PM</option>
+                            <option>09:00 PM</option>
+                            <option selected>10:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-users"></i> Guests</label>
+                    <input type="number" id="guestCount" class="input-field" min="1" max="100" value="12">
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-search"></i> </label>
+                    <button class="btn-primary" id="updateAvailabilityBtn"><i class="fas fa-rotate-right"></i> Check availability</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CUTLERY SHOWCASE with selection (click to book) -->
+        <div class="section-title">
+            <h3>🍽️ available cutlery</h3>
+            <span id="selectedCountDisplay">0 selected</span>
+        </div>
+
+        <div class="cutlery-grid" id="cutleryGrid">
+            <!-- Cutlery items will be dynamically populated, but we place static base / JS enhancement -->
+        </div>
+
+        <!-- Reservation summary & confirmation panel -->
+        <div class="reservation-side" id="reservationPanel">
+            <h4><i class="fas fa-basket-shopping"></i> Your cutlery booking</h4>
+            <div id="bookingListContainer">
+                <!-- dynamic injected booking list -->
+                <ul class="booking-list" id="bookingList"></ul>
+                <div id="emptyBooking" class="empty-state">
+                    <i class="fas fa-spoon"></i> No cutlery selected — tap any item above
+                </div>
+                <div id="totalSection" style="display: none;">
+                    <div class="total-amount">
+                        <span>Total (service fee)</span>
+                        <span id="totalPrice">$0</span>
+                    </div>
+                    <button class="btn-confirm" id="confirmBookingBtn"><i class="fas fa-check-circle"></i> Confirm cutlery booking</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✦ cutlary – heritage cutlery library. ✦ All bookings are tentative until confirmed. </p>
+        </footer>
+    </div>
+
+    <script>
+        (function(){
+            "use strict";
+
+            // ---------- CUTLERY DATASET ----------
+            const cutleryCatalog = [
+                { id: 'c1', name: 'Lumina forks', desc: '6-pc, brushed steel', icon: 'fa-utensils', price: 12, available: true },
+                { id: 'c2', name: 'Walnut handled knives', desc: '4-pc, carbon edge', icon: 'fa-knife-kitchen', price: 18, available: true },
+                { id: 'c3', name: 'Satin spoons', desc: '6-pc, dessert size', icon: 'fa-spoon', price: 9, available: true },
+                { id: 'c4', name: 'Hostess set', desc: 'ladle + servers', icon: 'fa-utensil-spoon', price: 22, available: true },
+                { id: 'c5', name: 'Kids\' cutlery', desc: '4-pc, round tip', icon: 'fa-child', price: 14, available: true },
+                { id: 'c6', name: 'Gilded cake set', desc: '3-pc, gold finish', icon: 'fa-cake-candles', price: 28, available: true }
+            ];
+
+            // ---------- STATE ----------
+            // selected cutlery IDs with quantity
+            let selectedItems = [
+                { id: 'c1', quantity: 1 },
+                { id: 'c3', quantity: 2 }
+            ]; // pre-selected for demo purpose (to show non-empty booking)
+
+            // DOM elements
+            const cutleryGrid = document.getElementById('cutleryGrid');
+            const bookingListEl = document.getElementById('bookingList');
+            const emptyBookingDiv = document.getElementById('emptyBooking');
+            const totalSectionDiv = document.getElementById('totalSection');
+            const totalPriceSpan = document.getElementById('totalPrice');
+            const selectedCountSpan = document.getElementById('selectedCountDisplay');
+            const liveBookingHint = document.getElementById('liveBookingHint');
+            const eventDateInput = document.getElementById('eventDate');
+            const startTimeSelect = document.getElementById('startTime');
+            const endTimeSelect = document.getElementById('endTime');
+            const guestCountInput = document.getElementById('guestCount');
+            const updateBtn = document.getElementById('updateAvailabilityBtn');
+
+            // ---------- RENDER CUTLERY GRID ----------
+            function renderCutleryGrid() {
+                if (!cutleryGrid) return;
+                cutleryGrid.innerHTML = ''; 
+                cutleryCatalog.forEach(item => {
+                    const isSelected = selectedItems.some(s => s.id === item.id);
+                    const selectedBadge = isSelected ? '<div class="selected-badge"><i class="fas fa-check"></i></div>' : '';
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `cutlery-item ${isSelected ? 'selected' : ''}`;
+                    itemDiv.dataset.id = item.id;
+                    itemDiv.setAttribute('role', 'button');
+                    itemDiv.setAttribute('tabindex', '0');
+                    itemDiv.innerHTML = `
+                        ${selectedBadge}
+                        <i class="fas ${item.icon}"></i>
+                        <div class="cutlery-name">${item.name}</div>
+                        <div class="cutlery-desc">${item.desc}</div>
+                        <span class="availability">$${item.price} per set</span>
+                    `;
+
+                    // click toggles selection
+                    itemDiv.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleSelectItem(item.id);
+                    });
+
+                    cutleryGrid.appendChild(itemDiv);
+                });
+            }
+
+            // toggle selection (add with quantity 1 or remove)
+            function toggleSelectItem(id) {
+                const existingIndex = selectedItems.findIndex(s => s.id === id);
+                if (existingIndex > -1) {
+                    // remove
+                    selectedItems.splice(existingIndex, 1);
+                } else {
+                    // add with default quantity = 1 (you can adjust, but simple booking)
+                    selectedItems.push({ id: id, quantity: 1 });
+                }
+                // update UI
+                renderCutleryGrid();
+                updateBookingSummary();
+                updateHeaderHint();
+            }
+
+            // update booking list, totals, badges
+            function updateBookingSummary() {
+                const listContainer = document.getElementById('bookingList');
+                const emptyDiv = document.getElementById('emptyBooking');
+                const totalDiv = document.getElementById('totalSection');
+                if (!listContainer) return;
+
+                // clear list
+                listContainer.innerHTML = '';
+
+                if (selectedItems.length === 0) {
+                    emptyDiv.style.display = 'block';
+                    totalDiv.style.display = 'none';
+                    selectedCountSpan.innerText = '0 selected';
+                    if (liveBookingHint) liveBookingHint.innerText = 'No active booking';
+                    return;
+                }
+
+                emptyDiv.style.display = 'none';
+                totalDiv.style.display = 'block';
+
+                // fill booking list
+                let total = 0;
+                selectedItems.forEach(sel => {
+                    const catalogItem = cutleryCatalog.find(c => c.id === sel.id);
+                    if (!catalogItem) return;
+                    const itemTotal = catalogItem.price * sel.quantity;
+                    total += itemTotal;
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="booking-item-info">
+                            <span class="booking-item-title">${catalogItem.name}</span>
+                            <span class="booking-item-meta">Qty: ${sel.quantity} × $${catalogItem.price}</span>
+                        </div>
+                        <div class="booking-item-price">$${itemTotal}</div>
+                    `;
+                    listContainer.appendChild(li);
+                });
+
+                // update total
+                totalPriceSpan.innerText = `$${total}`;
+                const count = selectedItems.reduce((acc, s) => acc + s.quantity, 0);
+                selectedCountSpan.innerText = `${count} selected`;
+
+                // update header hint
+                const dateVal = eventDateInput ? eventDateInput.value : '2025-06-15';
+                const guestVal = guestCountInput ? guestCountInput.value : '12';
+                liveBookingHint.innerText = `${selectedItems.length} items · ${guestVal} guests · ${dateVal}`;
+            }
+
+            function updateHeaderHint() {
+                if (!liveBookingHint) return;
+                if (selectedItems.length === 0) {
+                    liveBookingHint.innerText = 'No active booking';
+                    return;
+                }
+                const dateVal = eventDateInput.value || 'selected date';
+                const guestVal = guestCountInput.value || '0';
+                liveBookingHint.innerText = `${selectedItems.length} items · ${guestVal} guests · ${dateVal}`;
+            }
+
+            // confirm booking (simple alert simulation)
+            function confirmBooking() {
+                if (selectedItems.length === 0) {
+                    alert('✨ Please select at least one cutlery set to book.');
+                    return;
+                }
+                const date = eventDateInput.value || 'unknown date';
+                const start = startTimeSelect.value || 'start';
+                const end = endTimeSelect.value || 'end';
+                const guests = guestCountInput.value || '0';
+                let message = `✅ CUTLARY BOOKING CONFIRMED\n`;
+                message += `📅 ${date} · ${start} – ${end}\n`;
+                message += `👥 ${guests} guests · ${selectedItems.length} cutlery sets\n`;
+                message += `Thank you for booking heirloom cutlery!`;
+                alert(message);
+            }
+
+            // reset availability simulation (just updates header hint)
+            function refreshAvailability() {
+                updateHeaderHint();
+                // subtle animation / feedback
+                if (updateBtn) {
+                    updateBtn.innerHTML = '<i class="fas fa-check"></i> Updated!';
+                    setTimeout(() => {
+                        updateBtn.innerHTML = '<i class="fas fa-rotate-right"></i> Check availability';
+                    }, 1200);
+                }
+                // optionally you could adjust something else, but we keep guest/date sync
+                updateBookingSummary(); 
+            }
+
+            // ---------- INITIAL PAGE LOAD ----------
+            function init() {
+                // set default date if empty
+                if (eventDateInput && !eventDateInput.value) {
+                    const today = new Date();
+                    const yyyy = today.getFullYear();
+                    const mm = String(today.getMonth() + 1).padStart(2,'0');
+                    const dd = String(today.getDate()).padStart(2,'0');
+                    eventDateInput.value = `${yyyy}-${mm}-${dd}`;
+                }
+
+                renderCutleryGrid();
+                updateBookingSummary();
+
+                // attach event listeners
+                if (updateBtn) {
+                    updateBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        refreshAvailability();
+                    });
+                }
+
+                const confirmBtn = document.getElementById('confirmBookingBtn');
+                if (confirmBtn) {
+                    confirmBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        confirmBooking();
+                    });
+                }
+
+                // optional: guest count change -> update hint
+                if (guestCountInput) {
+                    guestCountInput.addEventListener('change', updateHeaderHint);
+                    guestCountInput.addEventListener('input', updateHeaderHint);
+                }
+                if (eventDateInput) {
+                    eventDateInput.addEventListener('change', updateHeaderHint);
+                }
+
+                // also refresh when times change to reflect header
+                if (startTimeSelect) startTimeSelect.addEventListener('change', updateHeaderHint);
+                if (endTimeSelect) endTimeSelect.addEventListener('change', updateHeaderHint);
+            }
+
+            init();
+        })();
+    </script>
+
+    <!-- minor fallback for cutlery grid if script fails (but works) -->
+    <noscript>Please enable JavaScript to book cutlery.</noscript>
+</body>
+</html>
